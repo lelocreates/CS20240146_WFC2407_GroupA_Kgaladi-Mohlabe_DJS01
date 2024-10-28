@@ -1,4 +1,4 @@
-//Parameters 
+//Parameters as objects 
 const velocity ={
   value:10000,
   unit: 'km/h'
@@ -6,8 +6,8 @@ const velocity ={
 
 const acceleration ={
   value: 38880,
-  unit: 'km/h^2'
-} // acceleration (m/s^2)
+  unit: 'km/h^2' //
+} // acceleration converted 
 
 const time ={
   value: 1,
@@ -31,26 +31,27 @@ const fuelBurnRate = {
   // fuel burn rate (kg/s)
 
 
-
+// this code block calls all the calculation functions with their corresponding arguments 
 const newDistance = calcNewDistance(distance, velocity, time)
 const remainingFuel = calcNewRemainingFuel(fuel, fuelBurnRate, time)
 const newVelocity = calcNewVel(velocity, acceleration, time) //calculates new velocity based on acceleration
 
-// Pick up an error with how the function below is called and make it robust to such errors
+//function that calculates the new velocity and checks the units of the arguments  to ensure that all the units are correct
 function calcNewVel(velocity, acceleration, time) { 
   if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
   if (velocity.unit !== 'km/h' || !velocity) throw new Error('Note that velocity as km/h is required')
   if (acceleration.unit !== 'km/h^2' || !acceleration) throw new Error('Note that acceleration in km/h^2 is required')
-  return velocity.value + (acceleration.value * time.value)
+  return velocity.value + (acceleration.value * time.value) // uses the object values to calculate the velocity 
 }
-
+//function calculates the new distance and checks the units of the arguments  to ensure that all the units are correct
 function calcNewDistance(distance, velocity, time) {
   if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
   if (velocity.unit !== 'km/h' || !velocity) throw new Error('Note that velocity as km/h is required')
   if (distance.unit !== 'km' || !distance) throw new Error('Note that distance in km is required')
-  return distance.value + (velocity.value * time.value) //calculates new distance
+  return distance.value + (velocity.value * time.value) //calculates new distance using the objects 
 }
 
+//function calculates the remaining fuel and checks the units of the arguments  to ensure that all the units are correct
 function calcNewRemainingFuel(fuel, fuelBurnRate, time) {
   if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
   if (fuel.unit !== 'kg' || !fuel) throw new Error('Note that fuel as kg is required')
@@ -58,6 +59,7 @@ function calcNewRemainingFuel(fuel, fuelBurnRate, time) {
   return fuel.value - (fuelBurnRate.value * time.value) //calculates remaining fuel
 }
 
+//logs calcutated value to the console 
 console.log(`Corrected New Velocity: ${newVelocity} km/h`);
 console.log(`Corrected New Distance: ${newDistance} km`);
 console.log(`Corrected Remaining Fuel: ${remainingFuel} kg`);
