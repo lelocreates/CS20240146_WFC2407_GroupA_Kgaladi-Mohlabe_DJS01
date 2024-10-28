@@ -38,24 +38,24 @@ const newVelocity = calcNewVel(velocity, acceleration, time) //calculates new ve
 
 //function that calculates the new velocity and checks the units of the arguments  to ensure that all the units are correct
 function calcNewVel(velocity, acceleration, time) { 
-  if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
-  if (velocity.unit !== 'km/h' || !velocity) throw new Error('Note that velocity as km/h is required')
-  if (acceleration.unit !== 'km/h^2' || !acceleration) throw new Error('Note that acceleration in km/h^2 is required')
+  if (time.unit !== 'h' || !time || typeof time.value !== 'number') throw new Error('Note that time as hours is required')
+  if (velocity.unit !== 'km/h' || !velocity || typeof velocity.value !== 'number') throw new Error('Note that velocity as km/h is required')
+  if (acceleration.unit !== 'km/h^2' || !acceleration || typeof acceleration.value !== 'number') throw new Error('Note that acceleration in km/h^2 is required')
   return velocity.value + (acceleration.value * time.value) // uses the object values to calculate the velocity 
 }
 //function calculates the new distance and checks the units of the arguments  to ensure that all the units are correct
 function calcNewDistance(distance, velocity, time) {
-  if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
-  if (velocity.unit !== 'km/h' || !velocity) throw new Error('Note that velocity as km/h is required')
-  if (distance.unit !== 'km' || !distance) throw new Error('Note that distance in km is required')
+  if (time.unit !== 'h' || !time || typeof time.value !== 'number') throw new Error('Note that time as hours is required')
+  if (velocity.unit !== 'km/h' || !velocity || typeof velocity.value !== 'number') throw new Error('Note that velocity as km/h is required')
+  if (distance.unit !== 'km' || !distance || typeof distance.value !== 'number') throw new Error('Note that distance in km is required')
   return distance.value + (velocity.value * time.value) //calculates new distance using the objects 
 }
 
 //function calculates the remaining fuel and checks the units of the arguments  to ensure that all the units are correct
 function calcNewRemainingFuel(fuel, fuelBurnRate, time) {
-  if (time.unit !== 'h' || !time) throw new Error('Note that time as hours is required')
-  if (fuel.unit !== 'kg' || !fuel) throw new Error('Note that fuel as kg is required')
-  if (fuelBurnRate.unit !== 'kg/h' || !fuelBurnRate) throw new Error('Note that fuel Burn Rate in kg/h is required')
+  if (time.unit !== 'h' || !time || typeof time.value !== 'number') throw new Error('Note that time as hours is required')
+  if (fuel.unit !== 'kg' || !fuel || typeof fuel.value !== 'number') throw new Error('Note that fuel as kg is required')
+  if (fuelBurnRate.unit !== 'kg/h' || !fuelBurnRate || typeof fuelBurnRate.value !== 'number') throw new Error('Note that fuel Burn Rate in kg/h is required')
   return fuel.value - (fuelBurnRate.value * time.value) //calculates remaining fuel
 }
 
